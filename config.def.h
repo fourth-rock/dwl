@@ -49,11 +49,11 @@ static const Layout layouts[] = {
  * WARNING: negative values other than (-1, -1) cause problems with Xwayland
  * clients: https://gitlab.freedesktop.org/xorg/xserver/-/issues/899 */
 static const MonitorRule monrules[] = {
-	/* name      mfact  nmaster  scale  layout       rotate/reflect              x   y */
+	/* name      mfact  nmaster  scale  layout       rotate/reflect              x   y   resx  resy  rate  mode  adaptive */
 	/* HiDPI laptop monitor */
-	{ "eDP-1",  0.5f,  1,       1.5f, &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1 },
+	{ "eDP-1",  0.5f,  1,       1.5f, &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1,  0,    0,    0.0f, 0,    0 },
 	/* Fallback rule; keep this last. */
-	{ NULL,     0.55f, 1,       1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1 },
+	{ NULL,     0.55f, 1,       1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1,  0,    0,    0.0f, 0,    0 },
 };
 
 /* keyboard */
