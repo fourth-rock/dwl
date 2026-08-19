@@ -59,8 +59,8 @@ pkill -f '[n]ow-playing --watch' 2>/dev/null
 (
 	sleep 1
 
-	awww img --resize crop "$HOME/Pictures/Wallpapers/darksouls.jpg" \
-		--transition-type simple
+	"$HOME/dotfiles/dwl/scripts/wallpaper" \
+		"$HOME/Pictures/Wallpapers/darksouls.jpg"
 
 	"$HOME/dotfiles/somebar/scripts/now-playing" --watch \
 		</dev/null \
