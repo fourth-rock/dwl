@@ -1,0 +1,9 @@
+#!/bin/sh
+
+exec swayidle -w \
+	timeout 300 'pgrep -x hyprlock >/dev/null || hyprlock --immediate-render &' \
+	timeout 600 'wlopm --off "*"' \
+		resume 'wlopm --on "*"' \
+	timeout 1800 'systemctl suspend' \
+	before-sleep 'pgrep -x hyprlock >/dev/null || hyprlock --immediate-render &' \
+	after-resume 'wlopm --on "*"'
