@@ -136,6 +136,10 @@ static const Key keys[] = {
 	/* Shift changes certain key codes: 2 -> at, etc. */
 	/* modifier                  key                  function          argument */
 
+	/* session controls */
+	{ MODKEY|WLR_MODIFIER_ALT, XKB_KEY_l, spawn,
+		SHCMD("pgrep -x hyprlock >/dev/null || hyprlock --immediate-render") },
+
 	/* programs */
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_b,           spawn,            {.v = browser} },
@@ -165,7 +169,6 @@ static const Key keys[] = {
 		SHCMD("volume down") },
 	{ 0, XKB_KEY_XF86AudioMute, spawn,
 		SHCMD("volume mute") },
-
 
   /* brightness control */
 	{ 0, XKB_KEY_XF86MonBrightnessUp, spawn,
