@@ -53,6 +53,7 @@ fi
 pkill -f "^/bin/sh $HOME/dotfiles/somebar/scripts/status.sh$" \
 	2>/dev/null
 pkill -x somebar 2>/dev/null
+pkill -f '[n]ow-playing --watch' 2>/dev/null
 
 # Start these after their daemons have had time to initialize.
 (
@@ -61,8 +62,18 @@ pkill -x somebar 2>/dev/null
 	awww img "$HOME/Pictures/Wallpapers/daleezy.jpg" \
 		--transition-type simple
 
+	"$HOME/dotfiles/somebar/scripts/now-playing" --watch \
+		</dev/null \
+		>/tmp/now-playing.log 2>&1 &
+
 	exec "$HOME/dotfiles/somebar/scripts/status.sh"
 ) &
 
 # Somebar must stay in the foreground to receive dwl's IPC stream.
 exec somebar > /tmp/somebar.log 2>&1
+
+# Pause playback and stop bar helpers when leaving dwl.
+mpc pause >/dev/null 2>&1
+pkill -f '[n]ow-playing --watch' 2>/dev/null
+pkill -f "^/bin/sh $HOME/dotfiles/somebar/scripts/status.sh$" \
+	2>/dev/null

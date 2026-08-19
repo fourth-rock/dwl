@@ -148,6 +148,16 @@ static const Key keys[] = {
   { MODKEY,                    XKB_KEY_s, spawn, SHCMD("screenshot region") },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_S, spawn, SHCMD("screenshot full") },
 
+	/* media controls */
+	{ 0, XKB_KEY_XF86AudioPlay, spawn,
+		SHCMD("mpc toggle") },
+	{ 0, XKB_KEY_XF86AudioPrev, spawn,
+		SHCMD("mpc prev") },
+	{ 0, XKB_KEY_XF86AudioNext, spawn,
+		SHCMD("mpc next") },
+	{ 0, XKB_KEY_XF86AudioStop, spawn,
+		SHCMD("mpc stop") },
+
 	/* programs */
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_b,           spawn,            {.v = browser} },
