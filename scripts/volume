@@ -1,0 +1,43 @@
+#!/bin/sh
+
+sink="@DEFAULT_AUDIO_SINK@"
+
+case "$1" in
+	up)
+		wpctl set-volume -l 1.0 "$sink" 5%+
+		;;
+	down)
+		wpctl set-volume "$sink" 5%-
+		;;
+	mute)
+		wpctl set-mute "$sink" toggle
+		;;
+	*)
+		printf 'usage: %s {up|down|mute}\n' "${0##*/}" >&2
+		exit 1
+		;;
+esac
+
+volume_info=$(wpctl get-volume "$sink")
+
+percentage=$(
+	printf '%s\n' "$volume_info" |
+	awk '{ printf "%.0f", $2 * 100 }'
+)
+
+if printf '%s\n' "$volume_info" | grep -q '\[MUTED\]'; then
+	notify-send \
+		-a volume \
+		-t 1500 \
+		-h string:x-canonical-private-synchronous:volume \
+		"Volume" \
+		"Muted"
+else
+	notify-send \
+		-a volume \
+		-t 1000 \
+		-h string:x-canonical-private-synchronous:volume \
+		-h int:value:"$percentage" \
+		"Volume" \
+		"${percentage}%"
+fi

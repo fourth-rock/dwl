@@ -1,0 +1,30 @@
+#!/bin/sh
+
+case "$1" in
+	up)
+		brightnessctl set 5%+ >/dev/null
+		;;
+	down)
+		brightnessctl set 5%- >/dev/null
+		;;
+	*)
+		printf 'usage: %s {up|down}\n' "${0##*/}" >&2
+		exit 1
+		;;
+esac
+
+percentage=$(
+	brightnessctl -m |
+	awk -F, '{
+		gsub(/%/, "", $4)
+		print $4
+	}'
+)
+
+notify-send \
+	-a brightness \
+  -t 1000 \
+	-h string:x-canonical-private-synchronous:brightness \
+	-h int:value:"$percentage" \
+	"Brightness" \
+	"${percentage}%"

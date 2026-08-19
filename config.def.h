@@ -151,12 +151,19 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_l,           setmfact,         {.f = +0.05f} },
 
 	/* volume controls */
-	{ 0, XKB_KEY_XF86AudioRaiseVolume, spawn,
-		SHCMD("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+") },
+  { 0, XKB_KEY_XF86AudioRaiseVolume, spawn,
+		SHCMD("volume up") },
 	{ 0, XKB_KEY_XF86AudioLowerVolume, spawn,
-		SHCMD("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") },
+		SHCMD("volume down") },
 	{ 0, XKB_KEY_XF86AudioMute, spawn,
-		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") },
+		SHCMD("volume mute") },
+
+
+  /* brightness control */
+	{ 0, XKB_KEY_XF86MonBrightnessUp, spawn,
+		SHCMD("brightness up") },
+	{ 0, XKB_KEY_XF86MonBrightnessDown, spawn,
+		SHCMD("brightness down") },
 
 	/* vanity gaps */
 	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_h,           incgaps,          {.i = +1 } },
