@@ -123,6 +123,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "foot", NULL };
 static const char *browser[] = { "zen-browser", NULL };
+static const char *filemanager[] = { "thunar", NULL };
 static const char *rmpccmd[] = { "foot", "rmpc", NULL };
 static const char *editor[]  = {
   "foot", "sh", "-c", "nvim; exec zsh", NULL
@@ -161,6 +162,7 @@ static const Key keys[] = {
 	/* programs */
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_b,           spawn,            {.v = browser} },
+	{ MODKEY,                    XKB_KEY_e,           spawn,            {.v = filemanager} },
   { MODKEY,                    XKB_KEY_m,           spawn,            {.v = rmpccmd} },
 	{ MODKEY,                    XKB_KEY_n,           spawn,            {.v = editor} },
 	{ MODKEY,                    XKB_KEY_Return,      spawn,            {.v = termcmd} },
@@ -216,11 +218,10 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Tab,         view,             {0} },
 	{ MODKEY,                    XKB_KEY_q,           killclient,       {0} },
 	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,           setlayout,        {.v = &layouts[1]} },
+	{ MODKEY,                    XKB_KEY_f,           togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_o,           setlayout,        {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,       togglefloating,   {0} },
-	{ MODKEY,                    XKB_KEY_e,           togglefullscreen, {0} },
 
 	/* tags */
 	{ MODKEY,                    XKB_KEY_0,           view,             {.ui = ~0} },
