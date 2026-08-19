@@ -1951,6 +1951,14 @@ mapnotify(struct wl_listener *listener, void *data)
 	} else {
 		applyrules(c);
 	}
+	/* Center transient dialogs and other automatically detected floating types. */
+	if (p || client_is_float_type(c))
+		resize(c, (struct wlr_box){
+			.x = c->mon->w.x + (c->mon->w.width - c->geom.width) / 2,
+			.y = c->mon->w.y + (c->mon->w.height - c->geom.height) / 2,
+			.width = c->geom.width,
+			.height = c->geom.height,
+		}, 0);
 	c->output = strdup(c->mon->wlr_output->name);
 	if (c->output == NULL) die("oom");
 
