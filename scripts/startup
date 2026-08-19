@@ -1,0 +1,64 @@
+#!/bin/sh
+
+export XDG_CURRENT_DESKTOP=dwl
+export XDG_SESSION_DESKTOP=dwl
+export XDG_SESSION_TYPE=wayland
+
+# Give D-Bus and systemd services the current Wayland environment.
+dbus-update-activation-environment --systemd \
+	WAYLAND_DISPLAY \
+	XDG_CURRENT_DESKTOP \
+	XDG_SESSION_DESKTOP \
+	XDG_SESSION_TYPE
+
+systemctl --user import-environment \
+	WAYLAND_DISPLAY \
+	XDG_CURRENT_DESKTOP \
+	XDG_SESSION_DESKTOP \
+	XDG_SESSION_TYPE
+
+# Restart the portals with the correct dwl environment.
+systemctl --user restart \
+	xdg-desktop-portal-wlr.service \
+	xdg-desktop-portal.service
+
+# Authentication prompts.
+if ! pgrep -f \
+		'^/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1$' \
+		>/dev/null; then
+	/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+fi
+
+# Notifications.
+if ! pgrep -x mako >/dev/null; then
+	mako &
+fi
+
+# Wallpaper daemon.
+if ! pgrep -x awww-daemon >/dev/null; then
+	awww-daemon &
+fi
+
+# Locking, display power management, and suspend.
+if ! pgrep -x swayidle >/dev/null; then
+	"$HOME/dotfiles/dwl/scripts/idle" \
+		> /tmp/swayidle.log 2>&1 &
+fi
+
+# Remove processes left behind by an earlier session.
+pkill -f "^/bin/sh $HOME/dotfiles/somebar/scripts/status.sh$" \
+	2>/dev/null
+pkill -x somebar 2>/dev/null
+
+# Start these after their daemons have had time to initialize.
+(
+	sleep 1
+
+	awww img "$HOME/Pictures/Wallpapers/daleezy.jpg" \
+		--transition-type simple
+
+	exec "$HOME/dotfiles/somebar/scripts/status.sh"
+) &
+
+# Somebar must stay in the foreground to receive dwl's IPC stream.
+exec somebar > /tmp/somebar.log 2>&1
