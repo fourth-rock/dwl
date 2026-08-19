@@ -123,6 +123,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "foot", NULL };
 static const char *browser[] = { "zen-browser", NULL };
+static const char *rmpccmd[] = { "foot", "rmpc", NULL };
 static const char *editor[]  = {
   "foot", "sh", "-c", "nvim; exec zsh", NULL
 };
@@ -143,13 +144,14 @@ static const Key keys[] = {
 	/* clipboard history */
 	{ MODKEY, XKB_KEY_v, spawn, SHCMD("clipboard") },
 
- 	/* screenshots */
-	{ MODKEY,                    XKB_KEY_s, spawn, SHCMD("screenshot region") },
+  /* screenshots */
+  { MODKEY,                    XKB_KEY_s, spawn, SHCMD("screenshot region") },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_S, spawn, SHCMD("screenshot full") },
 
 	/* programs */
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_b,           spawn,            {.v = browser} },
+  { MODKEY,                    XKB_KEY_m,           spawn,            {.v = rmpccmd} },
 	{ MODKEY,                    XKB_KEY_n,           spawn,            {.v = editor} },
 	{ MODKEY,                    XKB_KEY_Return,      spawn,            {.v = termcmd} },
 
@@ -192,20 +194,20 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_CTRL, XKB_KEY_l, incigaps,  {.i = -1 } },
 	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_0,           togglegaps,       {0} },
 	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, defaultgaps, {0} },
-	{ MODKEY,                    XKB_KEY_y,           incihgaps,        {.i = +1 } },
-	{ MODKEY,                    XKB_KEY_o,           incihgaps,        {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_y,           incivgaps,        {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_o,           incivgaps,        {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_y,           incohgaps,        {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_o,           incohgaps,        {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Y,           incovgaps,        {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_O,           incovgaps,        {.i = -1 } },
+	// { MODKEY,                    XKB_KEY_y,           incihgaps,        {.i = +1 } },
+	// { MODKEY,                    XKB_KEY_o,           incihgaps,        {.i = -1 } },
+	// { MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_y,           incivgaps,        {.i = +1 } },
+	// { MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_o,           incivgaps,        {.i = -1 } },
+	// { MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_y,           incohgaps,        {.i = +1 } },
+	// { MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_o,           incohgaps,        {.i = -1 } },
+	// { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Y,           incovgaps,        {.i = +1 } },
+	// { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_O,           incovgaps,        {.i = -1 } },
 	{ MODKEY,                    XKB_KEY_Return,      zoom,             {0} },
 	{ MODKEY,                    XKB_KEY_Tab,         view,             {0} },
 	{ MODKEY,                    XKB_KEY_q,           killclient,       {0} },
 	{ MODKEY,                    XKB_KEY_t,           setlayout,        {.v = &layouts[0]} },
 	{ MODKEY,                    XKB_KEY_f,           setlayout,        {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,           setlayout,        {.v = &layouts[2]} },
+	{ MODKEY,                    XKB_KEY_o,           setlayout,        {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,       setlayout,        {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,       togglefloating,   {0} },
 	{ MODKEY,                    XKB_KEY_e,           togglefullscreen, {0} },
