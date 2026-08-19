@@ -15,7 +15,7 @@ static const unsigned int gappih           = 7;  /* horizontal inner gap between
 static const unsigned int gappiv           = 7;  /* vertical inner gap between windows */
 static const unsigned int gappoh           = 15; /* horizontal outer gap between windows and screen edge */
 static const unsigned int gappov           = 10; /* vertical outer gap between windows and screen edge */
-static const unsigned int borderpx         = 1;  /* border pixel of windows */
+static const unsigned int borderpx         = 0;  /* border pixel of windows */
 static const float rootcolor[]             = COLOR(0x000000ff);
 static const float bordercolor[]           = COLOR(0x444444ff);
 static const float focuscolor[]            = COLOR(0x005577ff);
@@ -53,7 +53,7 @@ static const Layout layouts[] = {
 static const MonitorRule monrules[] = {
 	/* name      mfact  nmaster  scale  layout       rotate/reflect              x   y   resx  resy  rate  mode  adaptive */
 	/* HiDPI laptop monitor */
-	{ "eDP-1",  0.5f,  1,       1.5f, &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1,  0,    0,    0.0f, 0,    0 },
+	{ "eDP-1",  0.5f,  1,       1.440613f, &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1,  0,    0,    0.0f, 0,    0 },
 	/* Fallback rule; keep this last. */
 	{ NULL,     0.55f, 1,       1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1,  0,    0,    0.0f, 0,    0 },
 };
