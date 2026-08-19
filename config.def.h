@@ -22,6 +22,8 @@ static const float focuscolor[]            = COLOR(0x005577ff);
 static const float urgentcolor[]           = COLOR(0x770000ff);
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You can also use glsl colors */
+static const float default_opacity_unfocus = 0.90f;
+static const float default_opacity_focus   = 1.00f;
 
 /* tagging */
 #define TAGCOUNT (9)
@@ -30,9 +32,9 @@ static const float fullscreen_bg[]         = {0.0f, 0.0f, 0.0f, 1.0f}; /* You ca
 static int log_level = WLR_ERROR;
 
 static const Rule rules[] = {
-	/* app_id             title       tags mask     isfloating   monitor */
-	{ "Gimp_EXAMPLE",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
-	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
+	/* app_id             title       tags mask     isfloating   opacity focus          opacity unfocus          monitor */
+	{ "Gimp_EXAMPLE",     NULL,       0,            1,           default_opacity_focus, default_opacity_unfocus, -1 },
+	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           default_opacity_focus, default_opacity_unfocus, -1 },
 	/* Keep at least one rule, even if it is only an example. */
 };
 
@@ -149,6 +151,12 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_p,           incnmaster,       {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,           setmfact,         {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,           setmfact,         {.f = +0.05f} },
+
+	/* client opacity */
+	{ MODKEY|WLR_MODIFIER_CTRL, XKB_KEY_k, setopacityunfocus, {.f = +0.1f} },
+	{ MODKEY|WLR_MODIFIER_CTRL, XKB_KEY_j, setopacityunfocus, {.f = -0.1f} },
+	{ MODKEY|WLR_MODIFIER_CTRL|WLR_MODIFIER_SHIFT, XKB_KEY_K, setopacityfocus, {.f = +0.1f} },
+	{ MODKEY|WLR_MODIFIER_CTRL|WLR_MODIFIER_SHIFT, XKB_KEY_J, setopacityfocus, {.f = -0.1f} },
 
 	/* volume controls */
   { 0, XKB_KEY_XF86AudioRaiseVolume, spawn,
