@@ -1,0 +1,14 @@
+#!/bin/sh
+
+selection=$(
+	cliphist list |
+		wmenu -i -l 5 \
+      -f "JetBrais Mono Nerd Font 12" \
+      -p "Clipboard: "
+)
+
+[ -n "$selection" ] || exit 0
+
+printf '%s\n' "$selection" |
+	cliphist decode |
+	wl-copy

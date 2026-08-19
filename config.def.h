@@ -140,6 +140,9 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_ALT, XKB_KEY_l, spawn,
 		SHCMD("pgrep -x hyprlock >/dev/null || hyprlock --immediate-render") },
 
+	/* clipboard history */
+	{ MODKEY, XKB_KEY_v, spawn, SHCMD("clipboard") },
+
 	/* programs */
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_b,           spawn,            {.v = browser} },

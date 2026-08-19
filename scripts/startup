@@ -39,6 +39,10 @@ if ! pgrep -x awww-daemon >/dev/null; then
 	awww-daemon &
 fi
 
+# Clipboard history for text and images.
+wl-paste --type text --watch cliphist store &
+wl-paste --type image --watch cliphist store &
+
 # Locking, display power management, and suspend.
 if ! pgrep -x swayidle >/dev/null; then
 	"$HOME/dotfiles/dwl/scripts/idle" \
