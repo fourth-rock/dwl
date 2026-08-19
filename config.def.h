@@ -143,6 +143,10 @@ static const Key keys[] = {
 	/* clipboard history */
 	{ MODKEY, XKB_KEY_v, spawn, SHCMD("clipboard") },
 
+ 	/* screenshots */
+	{ MODKEY,                    XKB_KEY_s, spawn, SHCMD("screenshot region") },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_S, spawn, SHCMD("screenshot full") },
+
 	/* programs */
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_b,           spawn,            {.v = browser} },

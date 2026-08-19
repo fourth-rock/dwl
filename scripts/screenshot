@@ -1,0 +1,29 @@
+#!/bin/sh
+
+screenshot_dir="$HOME/Pictures/Screenshots"
+filename="$screenshot_dir/$(date '+%Y-%m-%d_%H-%M-%S').png"
+
+mkdir -p "$screenshot_dir"
+
+case "$1" in
+	full)
+		grim "$filename"
+		;;
+	region)
+		geometry=$(slurp) || exit 0
+		[ -n "$geometry" ] || exit 0
+		grim -g "$geometry" "$filename"
+		;;
+	*)
+		printf 'Usage: %s {full|region}\n' "$0" >&2
+		exit 2
+		;;
+esac
+
+wl-copy --type image/png < "$filename"
+
+notify-send \
+	-r 991 \
+	-t 2500 \
+	"Screenshot saved" \
+	"$filename"
