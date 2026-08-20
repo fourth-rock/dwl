@@ -5,6 +5,8 @@ wallpaper=$1
 [ -n "$wallpaper" ] || exit 1
 [ -f "$wallpaper" ] || exit 1
 
+ln -sfn "$wallpaper" "$HOME/Pictures/Wallpapers/current"
+
 awww img --resize crop "$wallpaper" \
 	--transition-type simple
 

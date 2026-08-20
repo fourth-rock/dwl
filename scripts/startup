@@ -60,7 +60,7 @@ pkill -f '[n]ow-playing --watch' 2>/dev/null
 	sleep 1
 
 	"$HOME/dotfiles/dwl/scripts/wallpaper" \
-		"$HOME/Pictures/Wallpapers/darksouls.jpg"
+		"$HOME/Pictures/Wallpapers/current"
 
 	"$HOME/dotfiles/somebar/scripts/now-playing" --watch \
 		</dev/null \
