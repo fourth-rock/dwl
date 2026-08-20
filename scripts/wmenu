@@ -1,0 +1,46 @@
+#!/bin/sh
+
+colors="${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors-somebar"
+
+# Dark fallback palette.
+foreground="bbbbbb"
+background="222222"
+accent="005577"
+accent_alt="444444"
+
+if [ -r "$colors" ]; then
+	{
+		read -r foreground
+		read -r background
+		read -r accent
+		read -r accent_alt
+	} < "$colors"
+
+	foreground=${foreground#\#}
+	background=${background#\#}
+	accent=${accent#\#}
+	accent_alt=${accent_alt#\#}
+fi
+
+case ${0##*/} in
+	wmenu-run)
+		exec /usr/bin/wmenu-run \
+			-N "$background" \
+			-n "$foreground" \
+			-M "$accent_alt" \
+			-m "$foreground" \
+			-S "$accent" \
+			-s "$foreground" \
+			"$@"
+		;;
+	*)
+		exec /usr/bin/wmenu \
+			-N "$background" \
+			-n "$foreground" \
+			-M "$accent_alt" \
+			-m "$foreground" \
+			-S "$accent" \
+			-s "$foreground" \
+			"$@"
+		;;
+esac
