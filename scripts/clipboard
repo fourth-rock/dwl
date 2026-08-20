@@ -3,7 +3,7 @@
 selection=$(
 	cliphist list |
 		wmenu -i -l 5 \
-      -f "JetBrais Mono Nerd Font 12" \
+      -f "JetBrains Mono Nerd Font 12" \
       -p "Clipboard: "
 )
 
