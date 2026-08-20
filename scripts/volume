@@ -28,16 +28,14 @@ percentage=$(
 if printf '%s\n' "$volume_info" | grep -q '\[MUTED\]'; then
 	notify-send \
 		-a volume \
-		-t 1500 \
+		-t 1000 \
 		-h string:x-canonical-private-synchronous:volume \
-		"Volume" \
-		"Muted"
+		"Volume Muted"
 else
 	notify-send \
 		-a volume \
 		-t 1000 \
 		-h string:x-canonical-private-synchronous:volume \
 		-h int:value:"$percentage" \
-		"Volume" \
-		"${percentage}%"
+		"Volume ${percentage}%"
 fi
