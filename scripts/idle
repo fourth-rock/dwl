@@ -1,9 +1,9 @@
 #!/bin/sh
 
 exec swayidle -w \
-	timeout 300 'pgrep -x hyprlock >/dev/null || hyprlock --immediate-render &' \
-	timeout 600 'wlopm --off "*"' \
+	timeout 300 '[ "$("$HOME/dotfiles/dwl/scripts/idle-inhibit" status)" = off ] && { pgrep -x hyprlock >/dev/null || hyprlock --immediate-render & }' \
+	timeout 600 '[ "$("$HOME/dotfiles/dwl/scripts/idle-inhibit" status)" = off ] && wlopm --off "*"' \
 		resume 'wlopm --on "*"' \
-	timeout 1800 'systemctl suspend' \
+	timeout 1800 '[ "$("$HOME/dotfiles/dwl/scripts/idle-inhibit" status)" = off ] && systemctl suspend' \
 	before-sleep 'pgrep -x hyprlock >/dev/null || hyprlock --immediate-render &' \
 	after-resume 'wlopm --on "*"'

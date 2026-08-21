@@ -3,5 +3,7 @@
 export XDG_CURRENT_DESKTOP=dwl
 export XDG_SESSION_DESKTOP=dwl
 export XDG_SESSION_TYPE=wayland
+# Firefox/Zen otherwise prefers a portal inhibitor that may not reach wlroots.
+export MOZ_WAKE_LOCK_TYPE=WaylandIdleInhibit
 
 exec dwl -s "$HOME/dotfiles/dwl/scripts/startup"

@@ -43,11 +43,9 @@ fi
 wl-paste --type text --watch cliphist store &
 wl-paste --type image --watch cliphist store &
 
-# Locking, display power management, and suspend.
-if ! pgrep -x swayidle >/dev/null; then
-	"$HOME/dotfiles/dwl/scripts/idle" \
-		> /tmp/swayidle.log 2>&1 &
-fi
+# Locking, display power management, and suspend. Restart after importing the
+# current Wayland environment so the service always targets this dwl session.
+systemctl --user restart swayidle.service
 
 # Remove processes left behind by an earlier session.
 pkill -f "^/bin/sh $HOME/dotfiles/somebar/scripts/status.sh$" \

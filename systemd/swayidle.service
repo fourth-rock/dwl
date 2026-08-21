@@ -1,0 +1,12 @@
+[Unit]
+Description=Idle manager for dwl
+Documentation=man:swayidle(1)
+
+[Service]
+Type=simple
+ExecStart=/home/mars/dotfiles/dwl/scripts/idle
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

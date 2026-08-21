@@ -5,7 +5,12 @@ wallpaper=$1
 [ -n "$wallpaper" ] || exit 1
 [ -f "$wallpaper" ] || exit 1
 
-ln -sfn "$wallpaper" "$HOME/Pictures/Wallpapers/current"
+# Startup passes current back into this script. Do not replace that link with
+# a link to itself; only update it when a different wallpaper is selected.
+current="$HOME/Pictures/Wallpapers/current"
+if [ "$wallpaper" != "$current" ]; then
+	ln -sfn "$(realpath "$wallpaper")" "$current"
+fi
 
 awww img --resize crop "$wallpaper" \
 	--transition-type simple

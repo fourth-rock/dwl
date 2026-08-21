@@ -5,26 +5,15 @@ manual_state="$state_dir/manual"
 
 start_idle()
 {
-	if [ -d "$state_dir" ] && find "$state_dir" -type f -print -quit | grep -q .; then
-		return
-	fi
-
-	if ! pgrep -x swayidle >/dev/null; then
-		"$HOME/dotfiles/dwl/scripts/idle" \
-			> /tmp/swayidle.log 2>&1 &
-	fi
-}
-
-stop_idle()
-{
-	pkill -x swayidle 2>/dev/null
+	systemctl --user start swayidle.service
 }
 
 case ${1:-toggle} in
 	on)
 		mkdir -p "$state_dir"
 		: > "$manual_state"
-		stop_idle
+		start_idle
+		wlopm --on "*" 2>/dev/null
 		;;
 
 	off)
@@ -39,7 +28,8 @@ case ${1:-toggle} in
 		else
 			mkdir -p "$state_dir"
 			: > "$manual_state"
-			stop_idle
+			start_idle
+			wlopm --on "*" 2>/dev/null
 		fi
 		;;
 
