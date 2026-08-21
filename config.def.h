@@ -51,11 +51,16 @@ static const Layout layouts[] = {
  * WARNING: negative values other than (-1, -1) cause problems with Xwayland
  * clients: https://gitlab.freedesktop.org/xorg/xserver/-/issues/899 */
 static const MonitorRule monrules[] = {
-	/* name      mfact  nmaster  scale  layout       rotate/reflect              x   y   resx  resy  rate  mode  adaptive */
-	/* HiDPI laptop monitor */
-	{ "eDP-1",  0.5f,  1,       1.440613f, &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1,  0,    0,    0.0f, 0,    0 },
+	/* name      mfact  nmaster  scale      layout       rotate/reflect              x     y   resx  resy  rate      mode  adaptive */
+
+	/* Framework display */
+	{ "eDP-1",  0.50f, 1,       1.441406f, &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 0,    0,  2256, 1504, 59.999f,  0,    0 },
+
+	/* Acer KB272 G0 */
+	{ "DP-3",   0.55f, 1,       1.0f,      &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 1566, 0,  1920, 1080, 120.0f,   0,    0 },
+
 	/* Fallback rule; keep this last. */
-	{ NULL,     0.55f, 1,       1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1,  0,    0,    0.0f, 0,    0 },
+	{ NULL,     0.55f, 1,       1.0f,      &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1,  -1, 0,    0,    0.0f,     0,    0 },
 };
 
 /* keyboard */
